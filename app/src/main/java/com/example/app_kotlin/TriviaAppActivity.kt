@@ -59,7 +59,8 @@ class TriviaAppActivity : ComponentActivity() {
                             FinishedScreen(
                                 score = state.score,
                                 total = state.questions.size * 100,
-                                livesLeft = state.lives
+                                livesLeft = state.lives,
+                                onGoHome = { finish() }
                             )
                         } else {
                             QuestionScreen(
@@ -199,7 +200,8 @@ fun QuestionScreen(
 fun FinishedScreen(
     score: Int,
     total: Int,
-    livesLeft: Int
+    livesLeft: Int,
+    onGoHome: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -225,8 +227,11 @@ fun FinishedScreen(
 
         Spacer(modifier = Modifier.height(64.dp))
 
-        Button(onClick = {}) {
-            Text("Reintentar Quiz")
+        Button(
+            onClick = onGoHome,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Volver al inicio")
         }
     }
 }
